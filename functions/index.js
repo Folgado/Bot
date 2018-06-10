@@ -37,7 +37,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   }
 
   function fim (agent) {
-    agent.add(`Muito Obrigado, espero falar com você novamente. :)   :)`);
+    agent.add(`Muito Obrigado, espero falar com você novamente. `);
   }
 
   // // Uncomment and edit to make your own intent handler
