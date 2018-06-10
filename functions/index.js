@@ -28,16 +28,16 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
 
   function welcome (agent) {
-    agent.add(`Seja bem vindo! Digite "Liberar Visao" para solicitar acesso aos benefícios. :( :( `);
+    agent.add(`Seja bem vindo! Digite "Liberar Visao" para solicitar acesso aos benefícios. `);
   }
 
   function fallback (agent) {
-    agent.add(`Não entendi, tente escrever de outra forma. kkkkkkk`);
+    agent.add(`Não entendi, tente escrever de outra forma. `);
     agent.add(`Experiemente falar "Ola".`);
   }
 
   function fim (agent) {
-    agent.add(`Muito Obrigado, espero falar com você novamente. =]`);
+    agent.add(`Muito Obrigado, espero falar com você novamente.`);
   }
 
   // // Uncomment and edit to make your own intent handler
