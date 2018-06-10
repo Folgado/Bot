@@ -28,7 +28,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
 
   function welcome (agent) {
-    agent.add(`Seja bem vindo! Digite "Liberar Visao" para solicitar acesso aos benefícios.`);
+    agent.add(`Seja bem vindo! Digite "Liberar Visao" para solicitar acesso aos benefícios. :( :( `);
   }
 
   function fallback (agent) {
