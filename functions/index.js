@@ -26,9 +26,11 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   const agent = new WebhookClient({ request, response });
   console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
+  var cnpj = request.body.cnpj;
 
   function welcome (agent) {
-    agent.add(`Seja bem vindo! Digite "Liberar Visao" para solicitar acesso aos benefícios. `);
+    const cnpj = agent.parameters.CNPJ;
+    agent.add(`Seja bem vindo ` + cnpj  + `! Digite "Liberar Visao" para solicitar acesso aos benefícios. `);
   }
 
   function fallback (agent) {
@@ -39,6 +41,11 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   function fim (agent) {
     agent.add(`Muito Obrigado, espero falar com você novamente.`);
   }
+
+  // function liberarVisao (agent) {
+  //   const cnpj = agent.parameters.cnpj;
+  //   agent.add(`Muito Obrigado, espero falar com você novamente.`);
+  // }
 
   // // Uncomment and edit to make your own intent handler
   // // uncomment `intentMap.set('your intent name here', yourFunctionHandler);`
