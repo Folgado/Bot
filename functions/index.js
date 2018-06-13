@@ -29,8 +29,14 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   var cnpj = request.body.cnpj;
 
   function welcome (agent) {
-    const cnpj = agent.parameters.CNPJ;
-    agent.add(`Seja bem vindo ` + cnpj  + `! Digite "Liberar Visao" para solicitar acesso aos benefícios. `);
+    const nome = agent.parameters.Nome;
+    agent.add(`Seja bem vindo ` + nome  + `! Digite "Liberar Visao" para solicitar acesso aos benefícios. `);
+
+    agent.setContext({
+      name: 'Nome',
+      lifespan: 5,
+      parameters:{Nome: nome}
+    });
   }
 
   function fallback (agent) {
@@ -39,13 +45,18 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   }
 
   function fim (agent) {
-    agent.add(`Muito Obrigado, espero falar com você novamente.`);
+    const nome = agent.getContext('Nome.Nome');
+    agent.add(`Foi um prazer ` + nome);
+    agent.add(`Espero falar com você novamente.`);
   }
 
-  // function liberarVisao (agent) {
-  //   const cnpj = agent.parameters.cnpj;
-  //   agent.add(`Muito Obrigado, espero falar com você novamente.`);
-  // }
+  function liberarVisao (agent) {
+    const cnpj = agent.parameters.CNPJ;
+    const dias = agent.parameters.Dias;
+    const email = agent.parameters.email;
+    agent.add(`Os benefícios serão liberados por ` + dias + ` dias para o CNPJ ` + cnpj + ` e a confirmação será enviada ao e-mail` + email);
+    agent.add(`Muito Obrigado, espero falar com você novamente.`);
+  }
 
   // // Uncomment and edit to make your own intent handler
   // // uncomment `intentMap.set('your intent name here', yourFunctionHandler);`
@@ -79,6 +90,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   intentMap.set('welcome', welcome);
   intentMap.set('Default Fallback Intent', fallback);
   intentMap.set('Fim', fim);
+  intentMap.set('LiberarVisao', liberarVisao);
   // intentMap.set('<INTENT_NAME_HERE>', googleAssistantHandler);
   agent.handleRequest(intentMap);
 });
