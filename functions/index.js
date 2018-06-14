@@ -16,11 +16,43 @@
 
 'use strict';
 
+/*
+// Banco ########################################
+var admin = require('firebase-admin');
+
+var serviceAccount = require('facebookbot-91914-29636e33e8d0.json');
+
+firebase.initializeApp({
+  credential: firebase.credential.cert(serviceAccount),
+  databaseURL: 'https://facebookbot-91914.firebaseio.com'
+});
+// [END initialize]
+
+
+/////////////////
+
+var db = admin.database();
+var ref = db.ref("/User/usuario");
+
+firebase.database().ref('/').set({
+  cnpj: "123456",
+  nome: "empresa de teste"
+});
+*/
+
+////////////
+
+
+
+//############################################
+// Chat ####################################
 const functions = require('firebase-functions');
 const {WebhookClient} = require('dialogflow-fulfillment');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 
 process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
+
+//##########################################
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
   const agent = new WebhookClient({ request, response });
@@ -32,11 +64,13 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     const nome = agent.parameters.Nome;
     agent.add(`Seja bem vindo ` + nome  + `! Digite "Liberar Visao" para solicitar acesso aos benefícios. `);
 
+/*
     agent.setContext({
       name: 'Nome',
       lifespan: 5,
       parameters:{Nome: nome}
     });
+    */
   }
 
   function fallback (agent) {
@@ -45,7 +79,8 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   }
 
   function fim (agent) {
-    const nome = agent.getContext('Nome.Nome');
+    //const nome = agent.getContext('Nome');
+    const nome = agent.parameters.Nome;
     agent.add(`Foi um prazer ` + nome);
     agent.add(`Espero falar com você novamente.`);
   }
