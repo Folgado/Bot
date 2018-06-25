@@ -14,10 +14,11 @@
   },
   "dependencies": {
     "actions-on-google": "2.0.0-alpha.3",
+    "dialogflow": "^0.1.0",
+    "dialogflow-fulfillment": "0.3.0-beta.2",
     "firebase-admin": "^4.2.1",
     "firebase-functions": "^0.5.7",
-    "dialogflow": "^0.1.0",
-    "dialogflow-fulfillment": "0.3.0-beta.2"
+    "googleapis": "^27.0.0"
   },
   "devDependencies": {
     "firebase": "^5.0.4"
