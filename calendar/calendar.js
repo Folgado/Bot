@@ -11,7 +11,7 @@ try {
   const content = fs.readFileSync('client_secret.json');
   authorize(JSON.parse(content), listEvents);
 } catch (err) {
- // return console.log('Error loading client secret file:', err);
+  return console.log('Error loading client secret file:', err);
 }
 
 /**
@@ -90,6 +90,7 @@ function listEvents(auth) {
       events.map((event, i) => {
         const start = event.start.dateTime || event.start.date;
         console.log(`${start} - ${event.summary}`);
+        return start;
       });
     } else {
       console.log('No upcoming events found.');

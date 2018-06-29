@@ -67,7 +67,16 @@
       });
 
       document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById('calendar').innerHTML = 'Teste';
+       try {
+        authorize(credentials, callback);
+        getAccessToken(oAuth2Client, callback);
+        listEvents(auth);
+        alert("ok");
+         document.getElementById('calendar').innerHTML = listEvents(firebase.auth());
+       } catch(e){
+        console.error(e);
+          document.getElementById('calendar').innerHTML = 'Erro.';
+       }
         
       });
     </script>
